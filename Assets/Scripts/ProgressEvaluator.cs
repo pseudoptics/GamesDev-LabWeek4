@@ -114,7 +114,7 @@ public class ProgressEvaluator : MonoBehaviour
         GameObject loadObj = GameObject.Find("LoadManager");
         if (loadObj == null)
             throw new EvalFailedException("No LoadManager GameObject found in the scene");
-#if Pass60
+#if Pass60        
         LoadAssets la = loadObj.GetComponent<LoadAssets>();
         if (la == null)
             throw new EvalFailedException("No LoadAssets component on the LoadManager GameObject");
@@ -122,12 +122,11 @@ public class ProgressEvaluator : MonoBehaviour
             throw new EvalFailedException("The redObj variable has not been set on the LoadAssets component attached to the LoadManager GameObject");
         if (!la.redObj.name.Equals("RedPrefab"))
             throw new EvalFailedException("The redObj variable of the LoadAssets component on the LoadManager is not currently set to the RedPrefab");
-#elif (!Pass60)
-        throw new EvalFailedException("Open the ProgressEvaluator.cs file and uncomment (i.e. remove the // symbol) the line at the top that says #define Pass60");
-#endif
-
         Debug.LogWarning("PROGRESS EVALUATOR: Git repository not being automatically checked from Pass50 onwards. " +
             "Make sure you are adding files, committing changes, and pushing commits on your respository.");
+#elif (!Pass60)
+        throw new EvalFailedException("Open the ProgressEvaluator.cs file and uncomment (i.e. remove the // symbol) the line at the top that says #define Pass60");
+#endif        
     }
 
     private void Credit70Band()
@@ -203,7 +202,7 @@ public class ProgressEvaluator : MonoBehaviour
             if (pAndH.rend == null)
                 throw new EvalFailedException("The rend variable of the PrintAndHide component on the RedPrefab has not been set.");
             if (!prefabEdit.CompareTag("Red"))
-                throw new EvalFailedException("The BluePrefab does not have the tag 'Red'");
+                throw new EvalFailedException("The RedPrefab does not have the tag 'Red'");
         }
         finally
         {
@@ -229,12 +228,13 @@ public class ProgressEvaluator : MonoBehaviour
             PrefabUtility.UnloadPrefabContents(prefabEdit);
         }
 
+        Debug.LogWarning("PROGRESS EVALUATOR: Seriously, do manual checks on your Git repository, does it look correct? A lot of your subjects at UTS will use it for group projects. " +
+            "You don't want to be 'that person' who stuffs up the entire group's repository, do you?");
+
         StartCoroutine(HD90Coroutine());
 #elif (!HD90)
         throw new EvalFailedException("Open the ProgressEvaluator.cs file and uncomment (i.e. remove the // symbol) the line at the top that says #define HD90");
-#endif
-        Debug.LogWarning("PROGRESS EVALUATOR: Seriously, do manual checks on your Git repository, does it look correct? A lot of your subjects at UTS will use it for group projects. " +
-            "You don't want to be 'that person' who stuffs up the entire group's repository, do you?");
+#endif        
     }
 
 
@@ -361,7 +361,7 @@ public class ProgressEvaluator : MonoBehaviour
 
     private static void EvalInProgressMessage(String band)
     {
-        Debug.LogWarning("PROGRESS EVALUATOR: " + band + " Band: This band is doing checks over multiple frames. Press keys identified in this band of the PDF to continue the checks -------------");
+        Debug.LogWarning("PROGRESS EVALUATOR: " + band + " Band: This band is doing checks over multiple frames. Press keys identified in this band (if any) in the PDF instructions -------------");
     }
 
 
